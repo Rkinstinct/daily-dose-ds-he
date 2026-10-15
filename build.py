@@ -35,7 +35,7 @@ for d, items in groups.items():
 <p class="meta">{dlabel(x['date'])}</p>
 <p><strong>בקצרה:</strong> {html.escape(s['tldr'])}</p><ul>{pts}</ul>
 <p class="aud"><strong>למי זה מתאים:</strong> {html.escape(s['audience'])}</p>{nt}
-<div class="tags">{tags}</div><a class="src" href="{x['url']}" rel="noopener" target="_blank">לגיליון המקורי ←</a></article>''')
+<div class="tags">{tags}</div>{f'<a class="src" href="{x["url"]}" rel="noopener" target="_blank">לגיליון המקורי ←</a>' if x.get("url") else ''}</article>''')
     body.append(f'<section class="section" id="d{d}"><div class="wrap"><h2 class="daytitle">{dlabel(d)}</h2>{"".join(cards)}</div></section>')
 n = len(L)
 page = f'''<!DOCTYPE html>
