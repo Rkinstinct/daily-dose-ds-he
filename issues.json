@@ -846,5 +846,36 @@
    ],
    "note": "הגיליון נפתח בקטע חסות של CopilotKit על פלטפורמת CLiF שלהם; טענות שם הן של הספק. הגיליון מקשר גם לקורס LLMOps בתשלום של היוצרים. הסיכום נכתב מהטקסט המלא של הגיליון."
   }
+ },
+ {
+  "slug": "how-cuda-graph-replay-cuts-inference",
+  "title": "How CUDA Graph Replay Cuts Inference Overhead",
+  "date": "2026-10-24",
+  "url": "https://blog.dailydoseofds.com/p/how-cuda-graph-replay-cuts-inference",
+  "access": "full",
+  "summary_he": {
+   "tldr": "למה ה-GPU מחכה ל-CPU בהסקת LLM, ואיך CUDA Graph replay פותר את זה: מקליטים פעם אחת את רצף הקרנלים כתוכנית ביצוע שמורה, ואז מפעילים אותה שוב ושוב בקריאת graph-launch אחת במקום להגיש כל קרנל בנפרד. בגיליון גם: HarnessRouter (קוד פתוח) שמחבר Grok Bot ל-harnesses של סוכנים אחרים, והבדלים בין RAG, Graph RAG ו-Agentic RAG.",
+   "points": [
+    "הבעיה: forward pass הוא לא פעולת GPU אחת אלא המון קרנלים קטנים (attention, כפל מטריצות, normalization, sampling). ה-CPU מגיש אותם אחד-אחד דרך ה-framework, ה-CUDA runtime וה-driver. אם ה-GPU מסיים קרנל לפני שה-CPU הגיש את הבא - הוא יושב בטל, וזה נראה כפערים בפרופיילר.",
+    "CUDA Graph הוא תוכנית ביצוע שמורה לעבודת GPU: אילו פעולות לרוץ, עם אילו ארגומנטים, ומה התלויות ביניהן. במקום לבנות ולהגיש את הרצף מחדש כל פעם, מכינים את התוכנית פעם אחת.",
+    "שלושה שלבים: warm-up רגיל (אתחול, בחירת קרנלים, הקצאת buffers וצורות טנסורים), capture (CUDA מקליטה את רצף הלונצ'ים והתלויות, לא את הפלט), ו-replay (מעתיקים קלט חדש לאותם buffers ומריצים הכל בקריאת graph-launch אחת).",
+    "חשוב: replay לא מחזיר תוצאה ישנה - הוא מריץ מחדש את אותם קרנלים על דאטה חדשה. המודל עושה כמעט אותה חשבון; החיסכון הוא בזמן ההגשה: framework dispatch, הכנת ארגומנטים וקריאות driver יוצאים מהנתיב החם.",
+    "מתאים במיוחד ל-decoding של LLM כי כל צעד חוזר על אותו מסלול: טוקן נוצר, ה-cache מתעדכן, והמודל רץ שוב. אותו גרף משרת הרבה צעדי decoding.",
+    "המחיר: גמישות. גרף מוקלט דורש אותם קרנלים, צורות, זרימת בקרה וכתובות זיכרון בכל replay. שרתי פרודקשן מקליטים כמה גרפים לגדלי batch נפוצים; batch שלא מתאים עובר padding או נופל חזרה להרצה רגילה. יותר גרפים = יותר זיכרון וזמן עלייה.",
+    "גם בגיליון: HarnessRouter (github.com/HarnessRouter/harnessrouter) - שכבת תשתית בקוד פתוח שמריצה משימות של Grok Bot דרך harnesses של Codex, Hermes, Claude Code, DeepSeek ועוד, כשכל סוכן שומר על המודל, הכלים והלולאה שלו.",
+    "וגם: RAG רגיל לשאילתות עובדתיות חד-שלביות; Graph RAG מוסיף גרף ידע (LLM מחלץ ישויות וקשרים באינדוקס) לשאילתות multi-hop - למשל לחבר 'checkout תלוי ב-payments API' דרך 'cluster-3 בתחזוקה'; Agentic RAG נותן לסוכן LLM להחליט בזמן אמת אילו כלים ומקורות לתשאל. אלו לא רמות התקדמות אלא פתרונות לסוגי שאילתות שונות."
+   ],
+   "audience": "מהנדסי inference ו-LLMOps שמכווננים latency/throughput, וכל מי שרוצה להבין מתי לבחור RAG רגיל, Graph RAG או Agentic RAG.",
+   "tags": [
+    "CUDA",
+    "inference",
+    "LLM",
+    "GPU",
+    "RAG",
+    "GraphRAG",
+    "open-source"
+   ],
+   "note": "הגיליון נקרא מהמייל המלא + ה-API הציבורי; גישה מלאה (audience=everyone), ללא חלק ספונסר."
+  }
  }
 ]
