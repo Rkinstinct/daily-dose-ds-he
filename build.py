@@ -28,7 +28,7 @@ for d, items in groups.items():
         pts = ''.join(f'<li>{html.escape(p)}</li>' for p in s['points'])
         tags = ''.join(f'<span>{html.escape(t)}</span>' for t in s['tags'])
         notes = []
-        if x['access'] != 'full': notes.append('התוכן המלא של הגיליון לא היה נגיש (חסום בתשלום), והסיכום מבוסס על החלק הציבורי בלבד.')
+        if x['access'] != 'full' and not x['slug'].startswith('email-'): notes.append('התוכן המלא של הגיליון לא היה נגיש (חסום בתשלום), והסיכום מבוסס על החלק הציבורי בלבד.')
         if s.get('note'): notes.append(s['note'])
         nt = f'<p class="note">{html.escape(" ".join(notes))}</p>' if notes else ''
         cards.append(f'''<article class="lec" id="{x['slug']}"><h3>{html.escape(x['title'])}</h3>
@@ -43,7 +43,7 @@ page = f'''<!DOCTYPE html>
 <header class="top"><div class="wrap"><a class="brand" href="https://rkinstinct.github.io/data-ai-hub/">DATA<span style="color:#F7931A">&amp;</span>AI <b>/ Daily Dose of DS</b></a></div></header>
 <main id="main"><div class="hero"><div class="wrap"><div class="eyebrow">DAILY DOSE OF DATA SCIENCE · מדריך בעברית</div><h1>Daily Dose of Data Science בעברית</h1>
 <p class="lead">הסבר בעברית לכל גיליון של הניוזלטר <a href="{SRC}" rel="noopener" target="_blank" style="color:#F7931A">Daily Dose of Data Science</a>. כל כרטיס נכתב מתוכן הגיליון עצמו, מהחדש לישן, עם הנקודות העיקריות וקישור לגיליון המקורי.</p>
-<p class="note">{n} גיליונות עד כה, כולם נגישים במלואם בארכיון הציבורי. בכל כרטיס מצוין אם יש בגיליון חסות או אם חלק ממנו לא סוכם. הקוד והמספרים הם כפי שהם מופיעים בגיליון, ולא נבדקו בנפרד. Jev הוא מודל של TypeSafe AI להחלטות מוקלדות, והוא מופיע בגיליונות רבים בסדרה.</p>
+<p class="note">{n} גיליונות עד כה, הסיכומים מבוססים על הארכיון הציבורי ועל גיליונות המייל. כיסוי חלקי או וידאו שלא נצפה מסומנים בכרטיס. בכל כרטיס מצוין אם יש בגיליון חסות או אם חלק ממנו לא סוכם. הקוד והמספרים הם כפי שהם מופיעים בגיליון, ולא נבדקו בנפרד. Jev הוא מודל של TypeSafe AI להחלטות מוקלדות, והוא מופיע בגיליונות רבים בסדרה.</p>
 <div class="toc">{''.join(toc)}</div></div></div>
 {''.join(body)}</main>
 <footer><div class="wrap"><span>הסברים עצמאיים, לא פרסום רשמי של Daily Dose of Data Science. התוכן המקורי שייך ליוצריו.</span></div><p class="rights-line" style="text-align:center;margin:18px auto 0;padding:0 16px;font-size:.92em;opacity:.9;width:100%">© כל הזכויות שמורות לראובן קזורר</p></footer></body></html>'''
