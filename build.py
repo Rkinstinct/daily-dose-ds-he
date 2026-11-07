@@ -31,11 +31,12 @@ for d, items in groups.items():
         if x['access'] != 'full' and not x['slug'].startswith('email-'): notes.append('התוכן המלא של הגיליון לא היה נגיש (חסום בתשלום), והסיכום מבוסס על החלק הציבורי בלבד.')
         if s.get('note'): notes.append(s['note'])
         nt = f'<p class="note">{html.escape(" ".join(notes))}</p>' if notes else ''
+        source_label = 'לאתר המפרסם' if x.get('url', '').rstrip('/') == 'https://www.dailydoseofds.com' else 'לגיליון המקורי'
         cards.append(f'''<article class="lec" id="{x['slug']}"><h3>{html.escape(x['title'])}</h3>
 <p class="meta">{dlabel(x['date'])}</p>
 <p><strong>בקצרה:</strong> {html.escape(s['tldr'])}</p><ul>{pts}</ul>
 <p class="aud"><strong>למי זה מתאים:</strong> {html.escape(s['audience'])}</p>{nt}
-<div class="tags">{tags}</div>{f'<a class="src" href="{x["url"]}" rel="noopener" target="_blank">לגיליון המקורי ←</a>' if x.get("url") else ''}</article>''')
+<div class="tags">{tags}</div>{f'<a class="src" href="{x["url"]}" rel="noopener" target="_blank">{source_label} ←</a>' if x.get("url") else ''}</article>''')
     body.append(f'<section class="section" id="d{d}"><div class="wrap"><h2 class="daytitle">{dlabel(d)}</h2>{"".join(cards)}</div></section>')
 n = len(L)
 page = f'''<!DOCTYPE html>
