@@ -1497,7 +1497,7 @@
     "slug": "email-2026-11-20-vibe-coding-blind-spot",
     "title": "Vibe Coding Has a Blind Spot",
     "date": "2026-11-20",
-    "url": "https://blog.dailydoseofds.com/",
+    "url": "https://blog.dailydoseofds.com/p/vibe-coding-has-a-blind-spot",
     "access": "full",
     "summary_he": {
       "tldr": "גיליון כפול ממומן. חלק ראשון (בשיתוף Deepnote): Deepnote בנתה מחדש את ה-data apps כך שסוכני קוד (Claude Code, Codex, Claude, ChatGPT) בונים ועורכים אותה אפליקציית נתונים חיה שהצוות יכול להשתמש בה מול דאטה אמיתי - לכל אפליקציה דף תרשימים ופילטרים שמגובה ב-notebook שמריץ SQL ו-Python, וה-credentials נשארים בצד השרת. חלק שני (בשיתוף Retool): 'הנקודה העיוורת' של vibe coding היא בקרת גישה - כל סוכן כותב בדיקת הרשאות משלו בתוך הקוד, ואף אחד לא רואה אם כל הגרסאות מסתדרות; Retool מציעה לאכוף מדיניות על חיבור ה-DB עצמו (Data Access Enforcement), כך שמדיניות אחת חלה על כל האפליקציות מכל סוכן.",
@@ -1521,7 +1521,7 @@
         "security",
         "shadow AI"
       ],
-      "note": "מבוסס על מלוא גוף גיליון המייל 'Vibe Coding Has a Blind Spot' שהתקבל ב-20 בנובמבר 2026 בשעה 02:45 בישראל; בעת הכרטוס הגיליון עוד לא הופיע בארכיון הציבורי, והקישור מוביל לדף הארכיון הראשי ויעודכן לקישור הקנוני כשיופיע. שני החלקים ממומנים: הראשון בשיתוף Deepnote ('Together with Deepnote') והשני בשיתוף Retool ('thanks to Retool for partnering on today's article'). דיווחי Wiz ו-Red Access, מספרי הדמו והטענות על יכולות המוצרים הם דיווח הגיליון והמפרסמים ולא אומתו; הרשאות per-viewer ב-Deepnote מוגבלות לאינטגרציות OAuth נתמכות, ודמו ה-Retool מכסה שלוש אפליקציות על resource מאוכף אחד ולא את כל נתיבי ה-DB. קישורי ה'נסו' וקישורי המעקב (kit-mail3/fandf.co) וקישור הקורס לא נכללו, בהתאם לכלל."
+      "note": "מבוסס על מלוא גוף גיליון המייל 'Vibe Coding Has a Blind Spot' שהתקבל ב-20 בנובמבר 2026 בשעה 02:45 בישראל. באותו יום אומת עותק הארכיון הציבורי לאותו גיליון (אותה כותרת ואותו תאריך, ומכיל את שני החלקים) והקישור עודכן אליו ללא יצירת כרטיס נוסף. שני החלקים ממומנים: הראשון בשיתוף Deepnote ('Together with Deepnote') והשני בשיתוף Retool ('thanks to Retool for partnering on today's article'). דיווחי Wiz ו-Red Access, מספרי הדמו והטענות על יכולות המוצרים הם דיווח הגיליון והמפרסמים ולא אומתו; הרשאות per-viewer ב-Deepnote מוגבלות לאינטגרציות OAuth נתמכות, ודמו ה-Retool מכסה שלוש אפליקציות על resource מאוכף אחד ולא את כל נתיבי ה-DB. קישורי ה'נסו' וקישורי המעקב (kit-mail3/fandf.co) וקישור הקורס לא נכללו, בהתאם לכלל."
     }
   }
 ]
